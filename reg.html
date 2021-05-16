@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+</head>
+<body>
+    <script>
+        var name = uname.value;
+        var upwd = upwd.value;
+        var phone = phone.value;
+        var reg = /^[a-zA-Z3-9]{3,12}$/;
+        var num = /^1[3-9]\d{9}&/;
+        if(!reg.test(name)){
+            msg.innnerHTML = "用户名格式错误";
+        }
+        if(!reg.test(upwd)){
+            msg.innnerHTML = "密码格式错误";
+        }
+        if(!num.test(phone)){
+            msg.innnerHTML = "手机号码格式错误";
+        }
+        if(!reg.test(code.value)){
+            msg.innnerHTML = "验证码格式错误";
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange =function(){
+       if(xhr.readyState == 4&& xhr.status ==200){
+           var r = xhr.responseText;
+        if(r==-1){
+            msg.innnerHTML = "验证码格式错误";
+            return;
+        }else if(r==0){
+            msg.innnerHTML = "用户名或者密码错误";
+        }else{
+            alert("注册成功");
+        }
+       }
+        }
+    </script>
+    <form>
+        <h1 class="msg"></h1>
+        用户名：<input type="text" name="uname" value="" placeholder="请输入用户名"></br>
+        密码：<input type="password" name="upwd" value="" placeholder="请输入密码"></br>
+        手机号码：<input type="phone" name="phone" value="" placeholder="请输入手机号码"></br>
+        <input type="code"  name="code" value="验证码">
+        <input type="submit" value="注册">
+    </form>
+</body>
+</html>
